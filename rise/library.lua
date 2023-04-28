@@ -1,5 +1,3 @@
--- made by noat :)
-
 local tweenService = game:GetService("TweenService")
 
 local Library = {}
@@ -295,6 +293,7 @@ function Library:New(name, vers)
 			function Component:Toggle(options)
 				local Enabled = options.Enabled or false
 				local Name = options.Name or "Toggle"
+				local Callback = options.Callback or function(boolean) end
 				local Toggle = {State = Enabled}
 				-- StarterGui.ScreenGui.Main.Modules.Component.Container.Toggle
 				Toggle["15"] = Instance.new("Frame", Component["12"]);
@@ -364,6 +363,7 @@ function Library:New(name, vers)
 								Position = UDim2.new(0, 1, 0, 1)
 							}):Play()
 						end
+						Callback(Toggle.State)
 					end
 				end)
 
@@ -373,7 +373,7 @@ function Library:New(name, vers)
 			function Component:Slider(options)
 				
 				local Slider = {
-					Name = options.name, Min = options.min, Max = options.max, Value = options.value
+					Name = options.name, Min = options.min, Max = options.max, Value = options.value, Callback = options.callback
 				}
 				-- StarterGui.ScreenGui.Main.Modules.Component.Container.Slider
 				-- StarterGui.ScreenGui.Main.Modules.Component.Container.Slider
@@ -455,6 +455,7 @@ function Library:New(name, vers)
 							}):Play()
 							print(SizeScale)
 						end)
+						Slider.Callback(Slider.Value)
 					end
 				end)
 				
@@ -530,6 +531,5 @@ function Library:New(name, vers)
 		
 		return Tab
 	end
-	
 	return GUI
-end
+end	
